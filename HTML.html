@@ -147,7 +147,7 @@
 </body>
 <script src="state.js"></script>
 <script>
-    fetch('http://localhost:3000/fields')
+    fetch('https://cadrella-back.onrender.com/fields')
     .then(res => res.text())
     .then(html => {
         document.querySelector('#main_content').innerHTML = html;
@@ -155,7 +155,7 @@
 
     function loadCatalogs() {
         history.pushState({page: 'catalogsPage'}, '', '/catalogsPage');
-        fetch('http://localhost:3000/catalogs')
+        fetch('https://cadrella-back.onrender.com/catalogs')
         .then(res => res.text())
         .then(html => {
             document.querySelector('#main_content').innerHTML = html;
