@@ -87,6 +87,11 @@ function sendBaseHTML(res, callback) {
   
 const server = http.createServer(async (req, res) => {
 
+    // Get data early
+    let supabaseGetFieldsJSONVariable = await supabaseGetFieldsJSON();
+    let supabaseGetCatalogsJSONVariable = await supabaseGetCatalogsJSON();
+    let supabaseGetProductsJSONVariable = await supabaseGetProductsJSON();
+
     // Add CORS headers to allow requests from any origin (you can replace * with a specific domain if needed)
     // Handle CORS for ALL requests
     res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins (you can restrict if needed)
@@ -112,7 +117,7 @@ const server = http.createServer(async (req, res) => {
 
             case '/fields': {
                 try {
-                    let data = await supabaseGetFieldsJSON();
+                    let data = supabaseGetFieldsJSONVariable;
 
                     let fields = '';
                     data.forEach(field => {
@@ -144,7 +149,7 @@ const server = http.createServer(async (req, res) => {
 
             case '/catalogs': {
                 try {
-                    let data = await supabaseGetCatalogsJSON();
+                    let data = supabaseGetCatalogsJSONVariable;
 
                     let catalogs = '';
                     data.forEach(catalog => {
@@ -213,7 +218,7 @@ const server = http.createServer(async (req, res) => {
             case '/products': {
                 console.log('heeeeeeeeeeeeeeeeeeeeee');
                 try {
-                    let data = await supabaseGetProductsJSON();
+                    let data = supabaseGetProductsJSONVariable;
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(data));
                 } catch (error) {
