@@ -86,12 +86,23 @@ const server = http.createServer(async (req, res) => {
         return;
     } else if(req.method === 'GET') {
         switch (req.url) {
-            case '/': {
-                data = '<p>Welcome to the Cadrella Server!</p>';
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end(data);
-            }
-            break;
+            const userAgent = req.headers['user-agent'] || '';
+
+    const filePath = path.join(__dirname, 'HTML.html')
+
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+        return;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.end(data);
+    });
+
+    break;
+  }
 
             case '/fields': {
                 try {
