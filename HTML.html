@@ -142,16 +142,60 @@
 </head>
 <body>
     <section id="main_content">
-
+        <section class="field" onclick="loadCatalogs()">
+            <section class="image_section">
+                <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+            </section>
+            <section class="field_name_section">
+                <p class="field_name">Art &nbsp; →</p>
+            </section>
+        </section>
+        
+        <section class="field" onclick="loadCatalogs()">
+            <section class="image_section">
+                <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+            </section>
+            <section class="field_name_section">
+                <p class="field_name">Personalities &nbsp; →</p>
+            </section>
+        </section>
+        
+        <section class="field" onclick="loadCatalogs()">
+            <section class="image_section">
+                <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+            </section>
+            <section class="field_name_section">
+                <p class="field_name">Sports &nbsp; →</p>
+            </section>
+        </section>
+        
+        <section class="field" onclick="loadCatalogs()">
+            <section class="image_section">
+                <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+            </section>
+            <section class="field_name_section">
+                <p class="field_name">Cars &nbsp; →</p>
+            </section>
+        </section>
+        
+        <section class="field" onclick="loadCatalogs()">
+            <section class="image_section">
+                <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+            </section>
+            <section class="field_name_section">
+                <p class="field_name">Books &nbsp; →</p>
+            </section>
+        </section>
     </section>
+    
 </body>
 <script src="state.js"></script>
 <script>
-    fetch('https://cadrella-back.onrender.com/fields')
+    /*fetch('https://cadrella-back.onrender.com/fields')
     .then(res => res.text())
     .then(html => {
         document.querySelector('#main_content').innerHTML = html;
-    });
+    });*/
 
     function loadCatalogs() {
         history.pushState({page: 'catalogsPage'}, '', '/catalogsPage');
