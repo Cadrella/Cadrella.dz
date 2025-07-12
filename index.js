@@ -103,7 +103,7 @@ const server = http.createServer(async (req, res) => {
                         fields += `
                                     <section class="field" onclick='loadCatalogs()'>
                                         <section class="image_section">
-                                            <img src="Frame.png" class="field_image" alt="Field Image">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
                                             <p class="field_name">${field.field_name} &nbsp; →</p>
@@ -135,7 +135,7 @@ const server = http.createServer(async (req, res) => {
                         catalogs += `
                                     <section class="field">
                                         <section class="image_section">
-                                            <img src="Frame.png" class="field_image" alt="Field Image">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
                                             <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
@@ -168,7 +168,7 @@ const server = http.createServer(async (req, res) => {
                         catalogs += `
                                     <section class="field">
                                         <section class="image_section">
-                                            <img src="Frame.png" class="field_image" alt="Field Image">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
                                             <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
