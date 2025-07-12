@@ -67,6 +67,21 @@ async function supabaseGetProductsJSON() {
     console.log('Products:', data);
     return data;
 }
+
+function sendBaseHTML() {
+    const filePath = path.join(__dirname, 'HTML.html')
+    
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+        return;
+        }
+    
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(data);
+    });
+}
   
 const server = http.createServer(async (req, res) => {
 
@@ -87,21 +102,8 @@ const server = http.createServer(async (req, res) => {
     } else if(req.method === 'GET') {
         switch (req.url) {
             case '/': {
-            const userAgent = req.headers['user-agent'] || '';
-
-            const filePath = path.join(__dirname, 'HTML.html')
-        
-            fs.readFile(filePath, (err, data) => {
-              if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/plain' });
-                res.end('Internal Server Error');
-                return;
-              }
-        
-              res.writeHead(200, { 'Content-Type': 'text/html' });
-              res.end(data);
-            });
-        
+            sendBaseHTML();
+            res.end();
             break;
           }
 
@@ -172,6 +174,8 @@ const server = http.createServer(async (req, res) => {
 
             case '/catalogsPage': {
                 try {
+                    sendBaseHTML();
+                    
                     let data = await supabaseGetCatalogsJSON();
 
                     let catalogs = '';
