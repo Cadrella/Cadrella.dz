@@ -68,7 +68,7 @@ async function supabaseGetProductsJSON() {
     return data;
 }
 
-function sendBaseHTML() {
+function sendBaseHTML(callback) {
     const filePath = path.join(__dirname, 'HTML.html')
     
     fs.readFile(filePath, (err, data) => {
@@ -81,6 +81,8 @@ function sendBaseHTML() {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
     });
+
+  callback();
 }
   
 const server = http.createServer(async (req, res) => {
@@ -102,8 +104,9 @@ const server = http.createServer(async (req, res) => {
     } else if(req.method === 'GET') {
         switch (req.url) {
             case '/': {
-            sendBaseHTML();
-            res.end();
+            sendBaseHTML(() => {
+              res.end();
+            });
             break;
           }
 
