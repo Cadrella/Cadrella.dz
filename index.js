@@ -178,10 +178,10 @@ const server = http.createServer(async (req, res) => {
             case '/catalogsPage': {
                 try {
                     sendBaseHTML(res, async () => {
-                        let data = await supabaseGetCatalogsJSON();
+                        let catalogsData = await supabaseGetCatalogsJSON();
 
                     let catalogs = '';
-                    data.forEach(catalog => {
+                    catalogsData.forEach(catalog => {
 
                         catalogs += `
                                     <section class="field">
