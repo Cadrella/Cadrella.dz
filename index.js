@@ -87,23 +87,9 @@ const server = http.createServer(async (req, res) => {
     } else if(req.method === 'GET') {
         switch (req.url) {
             case '/': {
-                const userAgent = req.headers['user-agent'] || '';
-                const isMobileDevice = /mobile|android|iphone|ipad|phone/i.test(userAgent);
-
-                const filePath = isMobileDevice
-                    ? path.join(__dirname, 'frontend/mobile/index.html')
-                    : path.join(__dirname, 'frontend/desktop/index.html');
-
-                fs.readFile(filePath, (err, data) => {
-                    if (err) {
-                    res.writeHead(500);
-                    res.end('Internal Server Error');
-                    return;
-                    }
-
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(data);
-                });
+                data = '<p>Welcome to the Cadrella Server!</p>';
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(data);
             }
 
             case '/fields': {
