@@ -80,9 +80,9 @@ function sendBaseHTML(callback) {
     
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
+      
+        callback();
     });
-
-  callback();
 }
   
 const server = http.createServer(async (req, res) => {
