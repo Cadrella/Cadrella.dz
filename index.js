@@ -115,9 +115,35 @@ const server = http.createServer(async (req, res) => {
     } else if(req.method === 'GET') {
         switch (req.url) {
             case '/': {
-            sendBaseHTML(res, () => {
-              res.end();
-            });
+            sendBaseHTML(res, async () => {
+                        let data = supabaseGetFieldsJSONVariable;
+
+                    let catalogs = '';
+                    data.forEach(catalog => {
+
+                        catalogs += `
+                                    <section class="field">
+                                        <section class="image_section">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+                                        </section>
+                                        <section class="field_name_section">
+                                            <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
+                                        </section>
+                                    </section>
+                                    `;
+
+                    })
+                    //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
+
+                    //res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.end(catalogs);
+                    });
+                    /*res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify(data));*/
+                } catch (error) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                });
             break;
           }
 
