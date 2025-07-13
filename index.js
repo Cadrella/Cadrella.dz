@@ -80,15 +80,16 @@ let supabaseGetProductsJSONVariable;
   supabaseGetProductsJSONVariable = await supabaseGetProductsJSON();
 })();
 
-const filePath = path.join(__dirname, 'HTML.html')
+let HTMLBaseFile;
+
+const filePath = path.join(__dirname, 'HTML.html');
     
   fs.readFile(filePath, (err, data) => {
       if (err) {
       console.error('Error reading file:', err);
       return;
       }
-
-      const HTMLBaseFile = data;
+      HTMLBaseFile = data;
 });
 
 function parseAndSerialize(baseFile, addedElements) {
