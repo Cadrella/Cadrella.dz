@@ -159,6 +159,9 @@ const server = http.createServer(async (req, res) => {
 
             case '/catalogs': {
                 try {
+                    //Measuring time
+                    // Start time
+                    console.time('late');
                     let data = supabaseGetCatalogsJSONVariable;
 
                     let catalogs = '';
@@ -182,6 +185,9 @@ const server = http.createServer(async (req, res) => {
                     res.end(catalogs);
                     /*res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(data));*/
+
+                    // End time
+                    console.timeEnd('late');
                 } catch (error) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
