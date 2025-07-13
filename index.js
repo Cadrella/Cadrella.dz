@@ -189,7 +189,7 @@ const server = http.createServer(async (req, res) => {
                 try {
                  let data = supabaseGetCatalogsJSONVariable;
 
-                    let fields = '';
+                    let catalogs = '';
                     data.forEach(catalog => {
 
                         catalogs += `
