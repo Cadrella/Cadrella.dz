@@ -147,18 +147,23 @@
     let element;
 
     fetch('https://cadrella-back.onrender.com/fields')
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
                 console.log('Received data:', data);
                 fields_data = data;
     
-                // Parse the HTML
-                const dom = new JSDOM(data);
-                const document = dom.window.document;
+                
     
                 // Extract the root element from the second HTML
                 element = document.body.children[1];
 
+                    // Create a new DOMParser instance
+                    const parser = new DOMParser();
+                    
+                    // Parse the string into a Document
+                    const doc = parser.parseFromString(data, 'text/html');
+
+                    element = doc.querySelector('#main_content');
 
                     document.querySelectorAll('.field').forEach(fieldElement => {
                     fieldElement.addEventListener('click', (event) => {
