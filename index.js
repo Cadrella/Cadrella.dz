@@ -131,9 +131,8 @@ const server = http.createServer(async (req, res) => {
                                             <p class="field_name">${field.catalog_name} &nbsp; →</p>
                                         </section>
                                     </section>
+                        </a>
                                     `;
-                      </a>
-
                     })
                     //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
 
