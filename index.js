@@ -257,7 +257,6 @@ const server = http.createServer(async (req, res) => {
 
             case '/catalogsPage': {
                 try {
-                    sendBaseHTML(res, async () => {
                         let data = supabaseGetCatalogsJSONVariable;
 
                     let catalogs = '';
@@ -279,8 +278,9 @@ const server = http.createServer(async (req, res) => {
 
                     let allCatalogs = `<section id="main_content">${catalogs}</section>`;
                     //res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(allCatalogs);
-                    });
+                    
                     /*res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(data));*/
                 } catch (error) {
