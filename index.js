@@ -117,7 +117,8 @@ const server = http.createServer(async (req, res) => {
             case '/': {
               try {
             sendBaseHTML(res, async () => {
-                        let data = supabaseGetFieldsJSONVariable;
+                    let data = supabaseGetFieldsJSONVariable;
+                    console.log(data);
 
                     let fields = '';
                     data.forEach(field => {
