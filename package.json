@@ -1,17 +1,17 @@
 {
-  "name": "cadrella-server",
+  "name": "mobile",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "createField.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-   "dependencies": {
-    "@supabase/supabase-js": "^2.39.5",
-    "cloudinary": "^1.41.3"
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.5",
+    "cloudinary": "^2.7.0",
+    "jsdom": "^26.1.0"
   }
 }
