@@ -33,7 +33,7 @@ async function supabaseGetFieldsJSON() {
       return null;
     }
   
-    console.log('Products:', data);
+    //console.log('Products:', data);
     return data;
 }
   
@@ -48,7 +48,7 @@ async function supabaseGetCatalogsJSON() {
       return null;
     }
   
-    console.log('Products:', data);
+    //console.log('Products:', data);
     return data;
 }
   
@@ -64,7 +64,7 @@ async function supabaseGetProductsJSON() {
     return null;
     }
 
-    console.log('Products:', data);
+    //console.log('Products:', data);
     return data;
 }
 
