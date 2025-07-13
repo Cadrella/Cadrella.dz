@@ -118,7 +118,6 @@ const server = http.createServer(async (req, res) => {
               try {
             sendBaseHTML(res, async () => {
                     let data = supabaseGetFieldsJSONVariable;
-                    console.log(data);
 
                     let fields = '';
                     data.forEach(field => {
