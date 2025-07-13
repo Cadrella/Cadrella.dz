@@ -157,7 +157,7 @@ const server = http.createServer(async (req, res) => {
                     data.forEach(field => {
 
                         fields += `
-                        <a href='https://cadrella-back.onrender.com/catalogsPage'>
+                        <a href='https://cadrella-back.onrender.com/fields'>
                                     <section class="field">
                                         <section class="image_section">
                                             <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
@@ -190,16 +190,16 @@ const server = http.createServer(async (req, res) => {
                  let data = supabaseGetCatalogsJSONVariable;
 
                     let fields = '';
-                    data.forEach(field => {
+                    data.forEach(catalog => {
 
-                        fields += `
-                        <a href='https://cadrella-back.onrender.com/catalogsPage'>
+                        catalogs += `
+                        <a href='https://cadrella-back.onrender.com/products'>
                                     <section class="field">
                                         <section class="image_section">
                                             <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
-                                            <p class="field_name">${field.field_name} &nbsp; →</p>
+                                            <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
                                         </section>
                                     </section>
                         </a>
@@ -207,9 +207,9 @@ const server = http.createServer(async (req, res) => {
                     })
                     //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
 
-                    let allFields = `<section id="main_content">${fields}</section>`;
+                    let allCatalogs = `<section id="main_content">${catalogs}</section>`;
 
-                    let htmlToSend = parseAndSerialize(HTMLBaseFile, allFields);
+                    let htmlToSend = parseAndSerialize(HTMLBaseFile, allCatalogs);
                     console.log(htmlToSend);
                     //res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.writeHead(200, { 'Content-Type': 'text/html' });
