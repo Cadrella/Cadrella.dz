@@ -79,23 +79,56 @@ let supabaseGetProductsJSONVariable;
   supabaseGetProductsJSONVariable = await supabaseGetProductsJSON();
 })();
 
-function sendBaseHTML(res, callback) {
-    const filePath = path.join(__dirname, 'HTML.html')
+const filePath = path.join(__dirname, 'HTML.html')
     
-    fs.readFile(filePath, (err, data) => {
-        if (err) {
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end('Internal Server Error');
-        return;
-        }
-    
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(data);
-      
-        callback();
-    });
-}
+  fs.readFile(filePath, (err, data) => {
+      if (err) {
+      console.error('Error reading file:', err);
+      return;
+      }
+
+      const HTMLBaseFile = data;
+});
+
+function parseAndSerialize(baseFile, addedElements) {
+  // Parse the first one
+  const dom1 = new JSDOM(baseFile);
+  const document1 = dom1.window.document;
   
+  // Parse the second one
+  const dom2 = new JSDOM(addedElements);
+  const document2 = dom2.window.document
+
+  
+  // Extract the root element from the second HTML
+  const innerElement = document2.body.firstElementChild;
+  if (!innerElement) {
+  throw new Error('No root element found in addedElements.');
+  }
+
+  // Find where to insert it in the first DOM
+  const container = document1.body;
+
+  // Find the element after which to insert — here hardcoded as 'header'
+  const afterElement = body.querySelector('#header');
+  if (!afterElement) {
+    throw new Error('Element with id="header" not found in baseFile.');
+  }
+
+  // Import the node from dom2 to dom1
+  const imported = document1.importNode(innerElement, true);
+
+  // Insert *after* the header element
+  if (afterElement.nextSibling) {
+    body.insertBefore(imported, afterElement.nextSibling);
+  } else {
+    body.appendChild(imported);
+  }
+
+  // Return the updated HTML as string
+  return dom1.serialize();
+}
+
 const server = http.createServer(async (req, res) => {
   
     // Add CORS headers to allow requests from any origin (you can replace * with a specific domain if needed)
