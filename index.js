@@ -1,4 +1,5 @@
 const http = require('http');
+const { JSDOM } = require('jsdom');
 
 const { createClient } = require('@supabase/supabase-js');
 
@@ -149,8 +150,7 @@ const server = http.createServer(async (req, res) => {
         switch (req.url) {
             case '/': {
               try {
-            sendBaseHTML(res, async () => {
-                    let data = supabaseGetFieldsJSONVariable;
+                 let data = supabaseGetFieldsJSONVariable;
 
                     let fields = '';
                     data.forEach(field => {
@@ -171,11 +171,11 @@ const server = http.createServer(async (req, res) => {
                     //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
 
                     let allFields = `<section id="main_content">${fields}</section>`;
+
+                    parseAndSerialize(HTMLBaseFile, allFields);
                     //res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(allFields);
-                    });
-                    /*res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify(data));*/
                 } catch (error) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
