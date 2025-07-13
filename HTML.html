@@ -30,7 +30,7 @@
 
             color: #f0f0f0;
 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+            /*box-shadow: 0 4px 8px rgba(0, 0, 0, 1);*/
         }
         div {
             flex: 0.5;
@@ -144,41 +144,77 @@
     <header id='header'></header>
 </body>
 <script>
-    let element;
+    let catalogsElement;
 
     fetch('https://cadrella-back.onrender.com/fields')
         .then(response => response.text())
         .then(data => {
                 console.log('Received data:', data);
                 fields_data = data;
-    
-                
-    
-                // Extract the root element from the second HTML
-                element = document.body.children[1];
 
-                    // Create a new DOMParser instance
-                    const parser = new DOMParser();
-                    
-                    // Parse the string into a Document
-                    const doc = parser.parseFromString(data, 'text/html');
-
-                    element = doc.querySelector('#main_content');
-
-                    document.querySelectorAll('.field').forEach(fieldElement => {
-                    fieldElement.addEventListener('click', (event) => {
-                        event.preventDefault();
+                // Create a new DOMParser instance
+                const parser = new DOMParser();
                 
-                        document.querySelector('#main_content').remove();
-                
-                        // Insert *after* the header element
-                        let header = document.querySelector('#header');
-                        header.parentNode.insertBefore(element, header.nextSibling);
-                    });
+                // Parse the string into a Document
+                const doc = parser.parseFromString(data, 'text/html');
+
+                catalogsElement = doc.querySelector('#main_content');
+
+                document.querySelectorAll('.field').forEach(fieldElement => {
+                fieldElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+
+                    // This adds /fields to the current URL without reloading the page
+                    history.pushState({ page: 'fields' }, '', '/fields');
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(catalogsElement, header.nextSibling);
                 });
+            });
         })
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+
+let fieldsElement;
+
+    fetch('https://cadrella-back.onrender.com/')
+        .then(response => response.text())
+        .then(data => {
+                console.log('Received data:', data);
+                fields_data = data;
+
+                // Create a new DOMParser instance
+                const parser = new DOMParser();
+                
+                // Parse the string into a Document
+                const doc = parser.parseFromString(data, 'text/html');
+
+                fieldsElement = doc.querySelector('#main_content');
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    
+
+  window.addEventListener('popstate', (event) => {
+      console.log('Popstate fired!', event.state);
+    
+      if (location.pathname === '/') {
+          console.log('User navigated to the root (/)');
+          // Load your "home" content here
+          document.querySelector('#main_content').replaceWith(fieldsElement);
+          
+      } else if (event.state && event.state.page === 'fields') {
+          console.log('User navigated to /fields');
+          // Load your "fields" content here
+      } else {
+          console.log('User navigated to another state');
+      }
+  });
+
 </script>
 </html>
