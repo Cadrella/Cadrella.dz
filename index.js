@@ -129,7 +129,7 @@ const server = http.createServer(async (req, res) => {
                                             <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
-                                            <p class="field_name">${field.catalog_name} &nbsp; →</p>
+                                            <p class="field_name">${field.field_name} &nbsp; →</p>
                                         </section>
                                     </section>
                         </a>
