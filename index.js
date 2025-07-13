@@ -198,7 +198,7 @@ const server = http.createServer(async (req, res) => {
                         let data = supabaseGetCatalogsJSONVariable;
 
                     let catalogs = '';
-                    catalogsData.forEach(catalog => {
+                    data.forEach(catalog => {
 
                         catalogs += `
                                     <section class="field">
