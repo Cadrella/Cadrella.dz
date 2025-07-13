@@ -111,7 +111,7 @@ function parseAndSerialize(baseFile, addedElements) {
   const container = document1.body;
 
   // Find the element after which to insert — here hardcoded as 'header'
-  const afterElement = body.querySelector('#header');
+  const afterElement = container.querySelector('#header');
   if (!afterElement) {
     throw new Error('Element with id="header" not found in baseFile.');
   }
@@ -121,9 +121,9 @@ function parseAndSerialize(baseFile, addedElements) {
 
   // Insert *after* the header element
   if (afterElement.nextSibling) {
-    body.insertBefore(imported, afterElement.nextSibling);
+    container.insertBefore(imported, afterElement.nextSibling);
   } else {
-    body.appendChild(imported);
+    container.appendChild(imported);
   }
 
   // Return the updated HTML as string
