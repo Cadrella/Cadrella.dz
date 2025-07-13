@@ -195,7 +195,7 @@ const server = http.createServer(async (req, res) => {
             case '/catalogsPage': {
                 try {
                     sendBaseHTML(res, async () => {
-                        let catalogsData = await supabaseGetCatalogsJSON();
+                        let data = supabaseGetCatalogsJSONVariable;
 
                     let catalogs = '';
                     catalogsData.forEach(catalog => {
