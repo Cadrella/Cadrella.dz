@@ -68,6 +68,17 @@ async function supabaseGetProductsJSON() {
     return data;
 }
 
+// Get data early
+let supabaseGetFieldsJSONVariable;
+let supabaseGetCatalogsJSONVariable;
+let supabaseGetProductsJSONVariable;
+
+( async () => {
+  supabaseGetFieldsJSONVariable = await supabaseGetFieldsJSON();
+  supabaseGetCatalogsJSONVariable = await supabaseGetCatalogsJSON();
+  supabaseGetProductsJSONVariable = await supabaseGetProductsJSON();
+})();
+
 function sendBaseHTML(res, callback) {
     const filePath = path.join(__dirname, 'HTML.html')
     
@@ -86,11 +97,6 @@ function sendBaseHTML(res, callback) {
 }
   
 const server = http.createServer(async (req, res) => {
-
-    // Get data early
-    let supabaseGetFieldsJSONVariable = await supabaseGetFieldsJSON();
-    let supabaseGetCatalogsJSONVariable = await supabaseGetCatalogsJSON();
-    let supabaseGetProductsJSONVariable = await supabaseGetProductsJSON();
 
     // Add CORS headers to allow requests from any origin (you can replace * with a specific domain if needed)
     // Handle CORS for ALL requests
