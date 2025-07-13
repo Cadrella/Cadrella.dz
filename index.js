@@ -115,6 +115,7 @@ const server = http.createServer(async (req, res) => {
     } else if(req.method === 'GET') {
         switch (req.url) {
             case '/': {
+              try {
             sendBaseHTML(res, async () => {
                         let data = supabaseGetFieldsJSONVariable;
 
