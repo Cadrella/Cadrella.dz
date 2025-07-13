@@ -187,13 +187,14 @@ const server = http.createServer(async (req, res) => {
 
             case '/fields': {
                 try {
-                    let data = supabaseGetFieldsJSONVariable;
+                 let data = supabaseGetCatalogsJSONVariable;
 
                     let fields = '';
                     data.forEach(field => {
 
                         fields += `
-                                    <section class="field" onclick='loadCatalogs()'>
+                        <a href='https://cadrella-back.onrender.com/catalogsPage'>
+                                    <section class="field">
                                         <section class="image_section">
                                             <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
@@ -201,22 +202,25 @@ const server = http.createServer(async (req, res) => {
                                             <p class="field_name">${field.field_name} &nbsp; →</p>
                                         </section>
                                     </section>
+                        </a>
                                     `;
-
                     })
-                    //let allFields = `<section id="main_content">${fields}</section>`;
+                    //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
 
+                    let allFields = `<section id="main_content">${fields}</section>`;
+
+                    let htmlToSend = parseAndSerialize(HTMLBaseFile, allFields);
+                    console.log(htmlToSend);
+                    //res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(fields);
-                    /*res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify(data));*/
+                    res.end(htmlToSend);
                 } catch (error) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
                 }
-            }
             break;
-
+            }
+              
             case '/catalogs': {
                 try {
                     //Measuring time
