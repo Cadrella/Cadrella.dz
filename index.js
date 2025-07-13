@@ -172,10 +172,11 @@ const server = http.createServer(async (req, res) => {
 
                     let allFields = `<section id="main_content">${fields}</section>`;
 
-                    parseAndSerialize(HTMLBaseFile, allFields);
+                    let htmlToSend = parseAndSerialize(HTMLBaseFile, allFields);
+                    console.log(htmlToSend);
                     //res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(allFields);
+                    res.end(htmlToSend);
                 } catch (error) {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
