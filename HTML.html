@@ -173,7 +173,7 @@
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+                    header.parentNode.insertBefore(catalogsElement.cloneNode(true), header.nextSibling);
 
                     fetchProductsPage()
                 });
@@ -212,7 +212,7 @@ function fetchProductsPage() {
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(productsElement, header.nextSibling);
+                    header.parentNode.insertBefore(productsElement.cloneNode(true), header.nextSibling);
                 });
             });
         })
@@ -249,7 +249,7 @@ let fieldsElement;
           console.log('User navigated to the root (/)');
           
           // Load your "home" content here
-          document.querySelector('#main_content').replaceWith(fieldsElement);
+          document.querySelector('#main_content').replaceWith(fieldsElement.cloneNode(true));
 
           document.querySelectorAll('.field').forEach(fieldElement => {
                 fieldElement.addEventListener('click', (event) => {
@@ -264,32 +264,13 @@ let fieldsElement;
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+                    header.parentNode.insertBefore(catalogsElement.cloneNode(true), header.nextSibling);
                 });
             });
           
       } else if (event.state && event.state.page === 'catalogs') {
           console.log('User navigated to /catalogs');
-          
           // Load your "fields" content here
-          document.querySelector('#main_content').replaceWith(catalogsElement);
-
-          document.querySelectorAll('.catalog').forEach(catalogElement => {
-                catalogElement.addEventListener('click', (event) => {
-                    event.preventDefault();
-            
-                    document.querySelector('#main_content').remove();
-                    
-                    // This adds /products to the current URL without reloading the page but never duplicates
-                    if (location.pathname !== '/products') {
-                      history.pushState({ page: 'products' }, '', '/products');
-                    }
-            
-                    // Insert *after* the header element
-                    let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(productsElement, header.nextSibling);
-                });
-            });
       } else {
           console.log('User navigated to another state');
       }
