@@ -145,13 +145,11 @@
 </body>
 <script>
     let catalogsElement;
-    console.log('Hi');
 
     fetch('https://cadrella-back.onrender.com/catalogs')
         .then(response => response.text())
         .then(data => {
                 fields_data = data;
-                console.log(fields_data);
 
                 // Create a new DOMParser instance
                 const parser = new DOMParser();
@@ -163,12 +161,9 @@
 
                 document.querySelectorAll('.field').forEach(fieldElement => {
                 fieldElement.addEventListener('click', (event) => {
-                    console.log('hello');
                     event.preventDefault();
-                    console.log('done');
             
                     document.querySelector('#main_content').remove();
-                    console.log('done2');
 
                     // This adds /fields to the current URL without reloading the page
                     history.pushState({ page: 'fields' }, '', '/fields');
@@ -176,7 +171,6 @@
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
                     header.parentNode.insertBefore(catalogsElement, header.nextSibling);
-                    console.log('done3');
                 });
             });
         })
@@ -211,6 +205,21 @@ let fieldsElement;
           console.log('User navigated to the root (/)');
           // Load your "home" content here
           document.querySelector('#main_content').replaceWith(fieldsElement);
+
+          document.querySelectorAll('.field').forEach(fieldElement => {
+                fieldElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+
+                    // This adds /fields to the current URL without reloading the page
+                    history.pushState({ page: 'fields' }, '', '/fields');
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+                });
+            });
           
       } else if (event.state && event.state.page === 'fields') {
           console.log('User navigated to /fields');
