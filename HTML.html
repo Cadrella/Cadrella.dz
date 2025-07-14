@@ -165,8 +165,8 @@
             
                     document.querySelector('#main_content').remove();
 
-                    // This adds /fields to the current URL without reloading the page
-                    history.pushState({ page: 'fields' }, '', '/fields');
+                    // This adds /catalogs to the current URL without reloading the page
+                    history.pushState({ page: 'catalogs' }, '', '/catalogs');
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
@@ -203,6 +203,7 @@ let fieldsElement;
     
       if (location.pathname === '/') {
           console.log('User navigated to the root (/)');
+          
           // Load your "home" content here
           document.querySelector('#main_content').replaceWith(fieldsElement);
 
@@ -220,9 +221,12 @@ let fieldsElement;
                     header.parentNode.insertBefore(catalogsElement, header.nextSibling);
                 });
             });
+
+          // This adds /catalogs to the current URL without reloading the page
+          history.pushState({ page: 'home' }, '', '/');
           
       } else if (event.state && event.state.page === 'fields') {
-          console.log('User navigated to /fields');
+          console.log('User navigated to /catalogs');
           // Load your "fields" content here
       } else {
           console.log('User navigated to another state');
