@@ -180,6 +180,43 @@
             console.error('Error fetching data:', error);
         });
 
+    let productsElement;
+
+    fetch('https://cadrella-back.onrender.com/products')
+        .then(response => response.text())
+        .then(data => {
+                produts_data = data;
+
+                // Create a new DOMParser instance
+                const parser = new DOMParser();
+                
+                // Parse the string into a Document
+                const doc = parser.parseFromString(data, 'text/html');
+
+                productsElement = doc.querySelector('#main_content');
+
+                document.querySelectorAll('.catalog').forEach(catalogElement => {
+                catalogElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+                    
+                    // This adds /products to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/products') {
+                      history.pushState({ page: 'products' }, '', '/products');
+                    }
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(productsElement, header.nextSibling);
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    
+
 let fieldsElement;
 
     fetch('https://cadrella-back.onrender.com/')
@@ -226,9 +263,28 @@ let fieldsElement;
                 });
             });
           
-      } else if (event.state && event.state.page === 'fields') {
+      } else if (event.state && event.state.page === 'catalogs') {
           console.log('User navigated to /catalogs');
+          
           // Load your "fields" content here
+          document.querySelector('#main_content').replaceWith(catalogsElement);
+
+          document.querySelectorAll('.catalog').forEach(catalogElement => {
+                catalogElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+                    
+                    // This adds /products to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/products') {
+                      history.pushState({ page: 'products' }, '', '/products');
+                    }
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(productsElement, header.nextSibling);
+                });
+            });
       } else {
           console.log('User navigated to another state');
       }
