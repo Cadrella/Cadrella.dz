@@ -174,7 +174,6 @@ const server = http.createServer(async (req, res) => {
                     let allFields = `<section id="main_content">${fields}</section>`;
 
                     let htmlToSend = parseAndSerialize(HTMLBaseFile, allFields);
-                    console.log(htmlToSend);
                     //res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(htmlToSend);
@@ -184,9 +183,9 @@ const server = http.createServer(async (req, res) => {
                 }
             break;
           }
-
-            case '/fields': {
-                try {
+              
+            case '/catalogs': {
+                 try {
                  let data = supabaseGetCatalogsJSONVariable;
 
                     let catalogs = '';
@@ -210,7 +209,42 @@ const server = http.createServer(async (req, res) => {
                     let allCatalogs = `<section id="main_content">${catalogs}</section>`;
 
                     let htmlToSend = parseAndSerialize(HTMLBaseFile, allCatalogs);
-                    console.log(htmlToSend);
+                    //res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.end(htmlToSend);
+                } catch (error) {
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
+                }
+              break;      
+            }
+
+            case '/products': {
+                console.log('heeeeeeeeeeeeeeeeeeeeee');
+                 try {
+                 let data = supabaseGetProductsJSONVariable;
+
+                    let products = '';
+                    data.forEach(product => {
+
+                        products += `
+                        <!--<a href='https://cadrella-back.onrender.com/products'>-->
+                                    <section class="field">
+                                        <section class="image_section">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+                                        </section>
+                                        <section class="field_name_section">
+                                            <p class="field_name">${product.product_name} &nbsp; →</p>
+                                        </section>
+                                    </section>
+                        <!--</a>-->
+                                    `;
+                    })
+                    //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
+
+                    let allProducts = `<section id="main_content">${products}</section>`;
+
+                    let htmlToSend = parseAndSerialize(HTMLBaseFile, allProducts);
                     //res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.writeHead(200, { 'Content-Type': 'text/html' });
                     res.end(htmlToSend);
@@ -219,103 +253,8 @@ const server = http.createServer(async (req, res) => {
                     res.end(JSON.stringify({ error: 'Internal Server Error' }));
                 }
             break;
-            }
-              
-            case '/catalogs': {
-                try {
-                    //Measuring time
-                    // Start time
-                    console.time('late');
-                    let data = supabaseGetCatalogsJSONVariable;
-
-                    let catalogs = '';
-                    data.forEach(catalog => {
-
-                        catalogs += `
-                                    <section class="field">
-                                        <section class="image_section">
-                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
-                                        </section>
-                                        <section class="field_name_section">
-                                            <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
-                                        </section>
-                                    </section>
-                                    `;
-
-                    })
-                    //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
-
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(catalogs);
-                    /*res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify(data));*/
-
-                    // End time
-                    console.timeEnd('late');
-                } catch (error) {
-                    res.writeHead(500, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                }
-                
-            }
-            break;
-
-            case '/catalogsPage': {
-                try {
-                        let data = supabaseGetCatalogsJSONVariable;
-
-                    let catalogs = '';
-                    data.forEach(catalog => {
-
-                        catalogs += `
-                                    <section class="field">
-                                        <section class="image_section">
-                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
-                                        </section>
-                                        <section class="field_name_section">
-                                            <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
-                                        </section>
-                                    </section>
-                                    `;
-
-                    })
-                    //let allCatalogs = `<section id="main_content">${catalogs}</section>`;
-
-                    let allCatalogs = `<section id="main_content">${catalogs}</section>`;
-                    //res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.writeHead(200, { 'Content-Type': 'text/html' });
-                    res.end(allCatalogs);
-                    
-                    /*res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify(data));*/
-                } catch (error) {
-                    res.writeHead(500, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                }
-                
-            }
-            break;
-
-            case '/products': {
-                console.log('heeeeeeeeeeeeeeeeeeeeee');
-                try {
-                    let data = supabaseGetProductsJSONVariable;
-                    res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify(data));
-                } catch (error) {
-                    res.writeHead(500, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'Internal Server Error' }));
-                }
-                
-            }
-            break;
-        
-            default: {
-                res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end('Not Found');
-            }
-            break;
         }
+            
     } else if (req.method === 'POST') {
         switch (req.url) {
             case '/order': {
