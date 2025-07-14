@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            margin: 0;
+        margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #efecec;
             font-family: Arial, sans-serif;
 
             display: flex;
@@ -19,14 +18,19 @@
             background-color: #f0f0f0;
             }
         #header{
-            background-color: #25355b;
+            background-color: #efecec;
             width: 100%;
-            height: 100px;
+            height: 130px;
 
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
+
+            border-bottom: solid;
+            border-bottom-color: rgba(144, 118, 69, 0.15);
+            border-bottom-width: 1px;
+
 
             color: #f0f0f0;
 
@@ -40,12 +44,11 @@
         }
         #main_content {
             display: grid;
-            width: 90%;
-            /*grid-template-columns: repeat(2, 1fr);*/
+            width: 95%;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             flex-direction: column;
             align-items: center;
-            background-color: #f0f0f0;
+            background-color: #efecec;
             height: Auto;
 
             align-items: center;
@@ -105,10 +108,18 @@
         .thumbnail_image {
             width: 100%;
             height: auto;
+
+            border-bottom: solid;
+            border-bottom-color: rgba(144, 118, 69, 0.15);
+            border-bottom-width: 1px;
+
+            border-top: solid;
+            border-top-color: rgba(144, 118, 69, 0.15);
+            border-top-width: 1px;
         }
-        #Caption {
+        #caption {
             width: 100%;
-            height: 110px;
+            height: 90px;
             background-color: #efecec;
 
             display: flex;
@@ -117,7 +128,8 @@
 
             font-size: 35px;
             font-weight: bold;
-            color: #25355b;
+            /*color: #25355b;*/
+            color: #907645;
 
             text-align: center;
 
@@ -126,7 +138,7 @@
         #collections {
             width: 100%;
             height: 100px;
-            background-color: #f0f0f0;
+            background-color: #efecec;
 
 
             display: flex;
@@ -137,12 +149,48 @@
 
             font-size: 35px;
             font-weight: bold;
-            color: #25355b;
+            /*color: #25355b;*/
+            color: #907645;
+
+            border-bottom: solid;
+            border-bottom-color: rgba(144, 118, 69, 0.15);
+            border-bottom-width: 1px;
+
+            border-top: solid;
+            border-top-color: rgba(144, 118, 69, 0.15);
+            border-top-width: 1px;
+        }
+        #Logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+        }
+        #Thumbnail {
+            height: 100%;
+
+            border-bottom: solid;
+            border-bottom-color: rgba(144, 118, 69, 0.15);
+            border-bottom-width: 1px;
+
+            border-top: solid;
+            border-top-color: rgba(144, 118, 69, 0.15);
+            border-top-width: 1px;
         }
     </style>
 </head>
 <body>
-    <header id='header'></header>
+    <header id="header">
+        <img src="Logo.png" id="Logo" alt="Logo">
+    </header>
+    <section id="caption">
+        <p>L'art de sublimer vos murs.</p>
+    </section>
+    <!--<section id="Thumbnail">-->
+        <img src="Q.png" class="thumbnail_image" alt="Thumbnail Image">
+    <!--</section>-->
+    <section id="collections">
+        <p>Collections</p>
+    </section>
 </body>
 <script>
 
