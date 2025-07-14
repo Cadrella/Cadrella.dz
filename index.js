@@ -160,7 +160,7 @@ const server = http.createServer(async (req, res) => {
                         <a href='https://cadrella-back.onrender.com/catalogs'>
                                     <section class="field">
                                         <section class="image_section">
-                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462347/03_5_nlmlkh.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
                                             <p class="field_name">${field.field_name} &nbsp; →</p>
@@ -195,7 +195,7 @@ const server = http.createServer(async (req, res) => {
                         <a href='https://cadrella-back.onrender.com/products'>
                                     <section class="catalog">
                                         <section class="image_section">
-                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462348/09_1_ddzdqs.png" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
                                             <p class="field_name">${catalog.catalog_name} &nbsp; →</p>
@@ -226,12 +226,11 @@ const server = http.createServer(async (req, res) => {
 
                     let products = '';
                     data.forEach(product => {
-
                         products += `
                         <!--<a href='https://cadrella-back.onrender.com/products'>-->
                                     <section class="product">
                                         <section class="image_section">
-                                            <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
+                                            <img src="${product.product_image}" class="field_image" alt="Field Image">
                                         </section>
                                         <section class="field_name_section">
                                             <p class="field_name">${product.product_name} &nbsp; →</p>
