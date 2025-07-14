@@ -214,6 +214,11 @@ let fieldsElement;
                     event.preventDefault();
             
                     document.querySelector('#main_content').remove();
+
+                    // This adds /catalogs to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/catalogs') {
+                      history.pushState({ page: 'catalogs' }, '', '/catalogs');
+                    }
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
