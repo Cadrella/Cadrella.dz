@@ -149,7 +149,6 @@
     fetch('https://cadrella-back.onrender.com/fields')
         .then(response => response.text())
         .then(data => {
-                console.log('Received data:', data);
                 fields_data = data;
 
                 // Create a new DOMParser instance
@@ -184,7 +183,6 @@ let fieldsElement;
     fetch('https://cadrella-back.onrender.com/')
         .then(response => response.text())
         .then(data => {
-                console.log('Received data:', data);
                 fields_data = data;
 
                 // Create a new DOMParser instance
