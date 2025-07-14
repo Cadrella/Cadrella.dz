@@ -173,6 +173,8 @@
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
                     header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+
+                    fetchProductsPage()
                 });
             });
         })
@@ -180,12 +182,13 @@
             console.error('Error fetching data:', error);
         });
 
-    let productsElement;
+let productsElement;
 
+function fetchProductsPage() {
     fetch('https://cadrella-back.onrender.com/products')
         .then(response => response.text())
         .then(data => {
-                produts_data = data;
+                products_data = data;
 
                 // Create a new DOMParser instance
                 const parser = new DOMParser();
@@ -215,6 +218,7 @@
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+}
     
 
 let fieldsElement;
