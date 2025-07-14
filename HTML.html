@@ -164,9 +164,11 @@
                     event.preventDefault();
             
                     document.querySelector('#main_content').remove();
-
-                    // This adds /catalogs to the current URL without reloading the page
-                    history.pushState({ page: 'catalogs' }, '', '/catalogs');
+                    
+                    // This adds /catalogs to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/fields') {
+                      history.pushState({ page: 'fields' }, '', '/fields');
+                    }
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
@@ -221,9 +223,6 @@ let fieldsElement;
                     header.parentNode.insertBefore(catalogsElement, header.nextSibling);
                 });
             });
-
-          // This adds /catalogs to the current URL without reloading the page
-          history.pushState({ page: 'home' }, '', '/');
           
       } else if (event.state && event.state.page === 'fields') {
           console.log('User navigated to /catalogs');
