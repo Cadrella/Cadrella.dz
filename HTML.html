@@ -285,7 +285,26 @@ let fieldsElement;
           
       } else if (event.state && event.state.page === 'catalogs') {
           console.log('User navigated to /catalogs');
+          
           // Load your "fields" content here
+          document.querySelector('#main_content').replaceWith(catalogsElement.cloneNode(true));
+
+            document.querySelectorAll('.catalog').forEach(catalogElement => {
+                catalogElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+    
+                    document.querySelector('#main_content').remove();
+            
+                    // This adds /products to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/products') {
+                        history.pushState({ page: 'products' }, '', '/products');
+                    }
+    
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(productsElement.cloneNode(true), header.nextSibling);
+                });
+            });
       } else {
           console.log('User navigated to another state');
       }
