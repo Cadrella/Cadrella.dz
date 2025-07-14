@@ -223,8 +223,8 @@
                     window.scrollTo(0, 0);
             
                     // Insert *after* the header element
-                    let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(catalogsElement.cloneNode(true), header.nextSibling);
+                    let collections = document.querySelector('#collections');
+                    collections.parentNode.insertBefore(catalogsElement.cloneNode(true), collections.nextSibling);
 
                     //fetchProductsPage();
 
@@ -242,8 +242,8 @@
                             window.scrollTo(0, 0);
             
                             // Insert *after* the header element
-                            let header = document.querySelector('#header');
-                            header.parentNode.insertBefore(productsElement.cloneNode(true), header.nextSibling);
+                            let collections = document.querySelector('#collections');
+                            collections.parentNode.insertBefore(productsElement.cloneNode(true), collections.nextSibling);
                 });
             });
                 });
@@ -316,8 +316,8 @@ let fieldsElement;
                     window.scrollTo(0, 0);
             
                     // Insert *after* the header element
-                    let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(catalogsElement.cloneNode(true), header.nextSibling);
+                    let collections = document.querySelector('#collections');
+                    collections.parentNode.insertBefore(catalogsElement.cloneNode(true), collections.nextSibling);
 
                     document.querySelectorAll('.catalog').forEach(catalogElement => {
                         catalogElement.addEventListener('click', (event) => {
@@ -333,8 +333,8 @@ let fieldsElement;
                             window.scrollTo(0, 0);
             
                             // Insert *after* the header element
-                            let header = document.querySelector('#header');
-                            header.parentNode.insertBefore(productsElement.cloneNode(true), header.nextSibling);
+                            let collections = document.querySelector('#collections');
+                            collections.parentNode.insertBefore(productsElement.cloneNode(true), collections.nextSibling);
                 });
             });
                 });
@@ -360,8 +360,8 @@ let fieldsElement;
                     window.scrollTo(0, 0);
     
                     // Insert *after* the header element
-                    let header = document.querySelector('#header');
-                    header.parentNode.insertBefore(productsElement.cloneNode(true), header.nextSibling);
+                    let collections = document.querySelector('#collections');
+                    collections.parentNode.insertBefore(productsElement.cloneNode(true), collections.nextSibling);
                 });
             });
       } else {
