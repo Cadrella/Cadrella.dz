@@ -229,7 +229,7 @@ const server = http.createServer(async (req, res) => {
 
                         products += `
                         <!--<a href='https://cadrella-back.onrender.com/products'>-->
-                                    <section class="field">
+                                    <section class="product">
                                         <section class="image_section">
                                             <img src="https://res.cloudinary.com/dcorvb30c/image/upload/v1751462940/02_1_qeqjsm.png" class="field_image" alt="Field Image">
                                         </section>
