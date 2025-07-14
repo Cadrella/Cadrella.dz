@@ -214,9 +214,6 @@ let fieldsElement;
                     event.preventDefault();
             
                     document.querySelector('#main_content').remove();
-
-                    // This adds /fields to the current URL without reloading the page
-                    history.pushState({ page: 'fields' }, '', '/fields');
             
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
