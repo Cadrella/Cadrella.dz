@@ -263,6 +263,23 @@ let fieldsElement;
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
                     header.parentNode.insertBefore(catalogsElement.cloneNode(true), header.nextSibling);
+
+                    document.querySelectorAll('.catalog').forEach(catalogElement => {
+                        catalogElement.addEventListener('click', (event) => {
+                            event.preventDefault();
+            
+                            document.querySelector('#main_content').remove();
+                    
+                            // This adds /products to the current URL without reloading the page but never duplicates
+                            if (location.pathname !== '/products') {
+                                history.pushState({ page: 'products' }, '', '/products');
+                            }
+            
+                            // Insert *after* the header element
+                            let header = document.querySelector('#header');
+                            header.parentNode.insertBefore(productsElement.cloneNode(true), header.nextSibling);
+                });
+            });
                 });
             });
           
