@@ -112,7 +112,7 @@ function parseAndSerialize(baseFile, addedElements) {
   const container = document1.body;
 
   // Find the element after which to insert — here hardcoded as 'header'
-  const afterElement = container.querySelector('#header');
+  const afterElement = container.querySelector('#collections');
   if (!afterElement) {
     throw new Error('Element with id="header" not found in baseFile.');
   }
