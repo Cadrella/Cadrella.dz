@@ -150,6 +150,7 @@
         .then(response => response.text())
         .then(data => {
                 fields_data = data;
+                consol.log(fields_data);
 
                 // Create a new DOMParser instance
                 const parser = new DOMParser();
@@ -161,9 +162,12 @@
 
                 document.querySelectorAll('.field').forEach(fieldElement => {
                 fieldElement.addEventListener('click', (event) => {
+                    consol.log('hello');
                     event.preventDefault();
+                    consol.log('done');
             
                     document.querySelector('#main_content').remove();
+                    consol.log('done2');
 
                     // This adds /fields to the current URL without reloading the page
                     history.pushState({ page: 'fields' }, '', '/fields');
@@ -171,6 +175,7 @@
                     // Insert *after* the header element
                     let header = document.querySelector('#header');
                     header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+                    consol.log('done3');
                 });
             });
         })
