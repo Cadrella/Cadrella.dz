@@ -254,7 +254,7 @@ const server = http.createServer(async (req, res) => {
                 }
             break;
         }
-            
+      }      
     } else if (req.method === 'POST') {
         switch (req.url) {
             case '/order': {
