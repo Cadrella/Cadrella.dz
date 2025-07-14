@@ -185,7 +185,6 @@
 
 let productsElement;
 
-function fetchProductsPage() {
     fetch('https://cadrella-back.onrender.com/products')
         .then(response => response.text())
         .then(data => {
@@ -219,7 +218,6 @@ function fetchProductsPage() {
         .catch(error => {
             console.error('Error fetching data:', error);
         });
-}
     
 
 let fieldsElement;
