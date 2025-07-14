@@ -144,69 +144,157 @@
     <header id='header'></header>
 </body>
 <script>
-    // 1️⃣ Fetch raw HTML once and store as strings
-let catalogsHTML, productsHTML, fieldsHTML;
 
-fetch('https://cadrella-back.onrender.com/catalogs')
-  .then(r => r.text())
-  .then(data => { catalogsHTML = data; });
+    let catalogsElement;
 
-fetch('https://cadrella-back.onrender.com/products')
-  .then(r => r.text())
-  .then(data => { productsHTML = data; });
+    fetch('https://cadrella-back.onrender.com/catalogs')
+        .then(response => response.text())
+        .then(data => {
+                fields_data = data;
 
-fetch('https://cadrella-back.onrender.com/')
-  .then(r => r.text())
-  .then(data => { fieldsHTML = data; });
+                // Create a new DOMParser instance
+                const parser = new DOMParser();
+                
+                // Parse the string into a Document
+                const doc = parser.parseFromString(data, 'text/html');
 
+                catalogsElement = doc.querySelector('#main_content');
 
-// 2️⃣ Render helper: parses fresh every time
-function renderContent(html) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  const newMain = doc.querySelector('#main_content');
-  document.querySelector('#main_content').replaceWith(newMain);
+                document.querySelectorAll('.field').forEach(fieldElement => {
+                fieldElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+                    
+                    // This adds /catalogs to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/catalogs') {
+                      history.pushState({ page: 'catalogs' }, '', '/catalogs');
+                    }
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+
+                    fetchProductsPage()
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
+let productsElement;
+
+function fetchProductsPage() {
+    fetch('https://cadrella-back.onrender.com/products')
+        .then(response => response.text())
+        .then(data => {
+                products_data = data;
+
+                // Create a new DOMParser instance
+                const parser = new DOMParser();
+                
+                // Parse the string into a Document
+                const doc = parser.parseFromString(data, 'text/html');
+
+                productsElement = doc.querySelector('#main_content');
+
+                document.querySelectorAll('.catalog').forEach(catalogElement => {
+                catalogElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+                    
+                    // This adds /products to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/products') {
+                      history.pushState({ page: 'products' }, '', '/products');
+                    }
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(productsElement, header.nextSibling);
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
 }
+    
 
+let fieldsElement;
 
-// 3️⃣ One delegated handler for all clicks on .field and .catalog
-document.body.addEventListener('click', (event) => {
-  // If user clicked a .field
-  if (event.target.matches('.field')) {
-    event.preventDefault();
+    fetch('https://cadrella-back.onrender.com/')
+        .then(response => response.text())
+        .then(data => {
+                fields_data = data;
 
-    if (location.pathname !== '/catalogs') {
-      history.pushState({ page: 'catalogs' }, '', '/catalogs');
-    }
+                // Create a new DOMParser instance
+                const parser = new DOMParser();
+                
+                // Parse the string into a Document
+                const doc = parser.parseFromString(data, 'text/html');
 
-    renderContent(catalogsHTML);
-  }
+                fieldsElement = doc.querySelector('#main_content');
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    
 
-  // If user clicked a .catalog
-  if (event.target.matches('.catalog')) {
-    event.preventDefault();
+  window.addEventListener('popstate', (event) => {
+      console.log('Popstate fired!', event.state);
+    
+      if (location.pathname === '/') {
+          console.log('User navigated to the root (/)');
+          
+          // Load your "home" content here
+          document.querySelector('#main_content').replaceWith(fieldsElement);
 
-    if (location.pathname !== '/products') {
-      history.pushState({ page: 'products' }, '', '/products');
-    }
+          document.querySelectorAll('.field').forEach(fieldElement => {
+                fieldElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
 
-    renderContent(productsHTML);
-  }
-});
+                    // This adds /catalogs to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/catalogs') {
+                      history.pushState({ page: 'catalogs' }, '', '/catalogs');
+                    }
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(catalogsElement, header.nextSibling);
+                });
+            });
+          
+      } else if (event.state && event.state.page === 'catalogs') {
+          console.log('User navigated to /catalogs');
+          
+          // Load your "fields" content here
+          document.querySelector('#main_content').replaceWith(catalogsElement);
 
+          document.querySelectorAll('.catalog').forEach(catalogElement => {
+                catalogElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    document.querySelector('#main_content').remove();
+                    
+                    // This adds /products to the current URL without reloading the page but never duplicates
+                    if (location.pathname !== '/products') {
+                      history.pushState({ page: 'products' }, '', '/products');
+                    }
+            
+                    // Insert *after* the header element
+                    let header = document.querySelector('#header');
+                    header.parentNode.insertBefore(productsElement, header.nextSibling);
+                });
+            });
+      } else {
+          console.log('User navigated to another state');
+      }
+  });
 
-// 4️⃣ Handle back/forward navigation
-window.addEventListener('popstate', (event) => {
-  console.log('Popstate fired!', event.state);
-
-  if (location.pathname === '/') {
-    renderContent(fieldsHTML);
-  } else if (location.pathname === '/catalogs') {
-    renderContent(catalogsHTML);
-  } else if (location.pathname === '/products') {
-    renderContent(productsHTML);
-  }
-});
-
+    
 </script>
 </html>
